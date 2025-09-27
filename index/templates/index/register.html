@@ -1,0 +1,36 @@
+{% extends 'index/layout.html' %}
+{% block body %}
+<div class="container">
+    <form action="{% url 'register' %}" method="post" class="box box-shadow margin-top-bottom">
+        <div class="form-group">
+            <h1 class="box-title">Registrar usuario</h1>
+            <p class="form-error">{{message}}</p>
+            {% csrf_token %}
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Nombre de usuario:</p>
+            <input type="text" class="form-control input-animate" name="username" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Correo electrónico:</p>
+            <input type="email" name="email" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Contraseña:</p>
+            <input type="password" name="password" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Confirmación de contraseña:</p>
+            <input type="password" name="confirmation" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group">
+            <p class="form-label">¿Ya tienes cuenta? <a class="link" href="{% url 'login' %}">Iniciar sesión</a></p>
+            <input type="submit" value="Registrar" class="btn btn-dark form-control">
+        </div>
+    </form>
+</div>
+{% endblock %}

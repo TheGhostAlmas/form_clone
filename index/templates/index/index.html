@@ -1,0 +1,70 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% block script %}
+<script src="{% static 'index/index.js' %}" defer></script>
+<script src="{% static 'lib/cookie.min.js' %}" defer></script>
+{% endblock %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    <div class="topnav nav-effect">
+        <div class="nav-padding">
+            <span class="nav-ham" id="nav-ham">&#9776;</span>
+            <img src="{% static 'Icon/icon.png' %}" alt="Ícono de Google Forms (CLONE)" class="navbar-icon form-icon" title="Forms">
+            <span class="nav-text" title="Forms"><a href="{% url 'index' %}" class="nav-link">Forms CLONE</a></span>
+            <a href="{% url 'logout' %}">
+                <img src="{% static 'Icon/Logout.jpg' %}" alt="Ícono de cerrar sesión" class="navbar-icon float-right logout-icon" title="Cerrar sesión">
+            </a>
+        </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <span class="close-sidebar" id="close-sidebar">&times;</span>
+        <div class="sidebar-content">
+            <h4 class="sidebar-title">
+                <a href="{% url 'index' %}" class="sidebar-title-link">
+                    <span>Google Forms CLONE</span>
+                </a>
+            </h4>
+            <p class="text-label">¿Encontraste un error? Envía un informe <a href="https://github.com/kimlimjustin/google-form-clone/issues" class="link">aquí</a></p>
+            <p class="text-label">Licencia: <a href="https://github.com/kimlimjustin/google-form-clone/blob/master/LICENSE" class="link">MIT</a></p>
+            <p class="text-label">Código fuente: <a href="https://github.com/kimlimjustin/google-form-clone">
+                <img src="{% static 'Icon/github.png' %}" class="github-icon" alt="GitHub"></a></p>
+            <p class="text-label">Apoya al creador <a href="https://github.com/kimlimjustin/google-form-clone" class="link">dándole una estrella en GitHub</a></p>
+        </div>
+    </div>
+    <div class="create-form">
+        <div class="container">
+            <p class="forms-label">Empieza un nuevo formulario</p>
+            <div class="form-template-box">
+                <img src="{% static 'Icon/blank-form.png' %}" alt="Formulario en blanco" title="Formulario en blanco" id="create-blank-form">
+                <span class="form-template-label">Formulario en blanco</span>
+            </div>
+            <div class="form-template-box big-screen">
+                <img src="{% static 'Template/contact_information.png' %}" alt="Información de contacto" title="Información de contacto" id="create-contact-form">
+                <span class="form-template-label">Información de contacto</span>
+            </div>
+            <div class="form-template-box big-screen">
+                <img src="{% static 'Template/customer_feedback.png' %}" alt="Retroalimentación del cliente" title="Retroalimentación del cliente" id="create-customer-feedback">
+                <span class="form-template-label">Retroalimentación del cliente</span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="form-list">
+            <p class="forms-label">Tus formularios:</p>
+            {% for i in forms %}
+            <a href="{% url 'edit_form' i.code %}" class="form-list-link">
+                <div class="form-box">
+                    <div class="form-list-title"><h5 class="form-list-title-text">{{i.title}}</h5></div>
+                    {% if i.createdAt == i.updatedAt %}
+                    <p class="form-list-timestamp">{{i.createdAt}}</p>
+                    {% else %}
+                    <p class="form-list-timestamp">{{i.updatedAt}}</p>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
